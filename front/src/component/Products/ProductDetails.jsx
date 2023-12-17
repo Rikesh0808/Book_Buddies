@@ -254,7 +254,7 @@ const [recommended,setRecommended]=useState([]);
           <div className="container" id="container" >
             {recommended &&
               recommended.map((product) => (
-                // <p>nimesh</p>
+                // <p>Rikesh</p>
                 <ProductCard key={product._id} product={product} />
               ))}
           </div>

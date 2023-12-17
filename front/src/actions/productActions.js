@@ -73,11 +73,11 @@ export const getRecommendProduct =
       //   link = `/api/v2/products?keyword=${keyword}&page=${currentPage}&category=${category}`;
       // }
       const { data } = await axios.get(link);
-      console.log(data);
+      console.log(data.data);
 
       dispatch({
         type: ALL_PRODUCT_SUCCESS,
-        payload: data,
+        payload: data.data,
       });
     } catch (error) {
       dispatch({

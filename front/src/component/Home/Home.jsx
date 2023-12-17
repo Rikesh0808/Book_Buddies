@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import "./Home.css";
 import Carousel from "react-material-ui-carousel";
 import bg from "../../Assets/shopping2.webp";
@@ -11,23 +11,26 @@ import MetaData from "../../more/MetaData";
 import Footer from "../../more/Footer";
 import BottomTab from "../../more/BottomTab";
 import { ToastContainer } from "react-toastify";
+import axios from "axios";
 
 const Home = () => {
   const dispatch = useDispatch();
-
-  const { products,error,loading } = useSelector(
-    (state) => state.products
-  );
+const [products,setProducts]=useState();
+  // const { products,error,loading } = useSelector(
+  //   (state) => state.products
+  // );
+  const getProducts=async()=>{
+    const { data } = await axios.get('/api/v2/product/recommend');
+    console.log(data.data);
+    setProducts(data.data);
+  }
 
   useEffect(() => {
-    dispatch(getRecommendProduct());
-  }, [dispatch]);
+    // dispatch(getRecommendProduct());
+    getProducts();
+  }, []);
   console.log(products);
   return (
-    <>
-      {loading ? (
-        <loading />
-      ) : (
         <>
           <MetaData title="Book Buddies-Home" />
           <Header />
@@ -47,6 +50,7 @@ const Home = () => {
               >
                 <h2
                   style={{
+                    color:'white',
                     fontFamily: "Segoe Script",
                     fontSize: "2em",
                     fontWeight: "500",
@@ -116,7 +120,7 @@ const Home = () => {
             </div>
           </div>
 
-          <h2 className="homeHeading">Featured Products</h2>
+          <h2 className="homeHeading">Recommended Books</h2>
           <div className="container" id="container">
             {products &&
               products.map((product) => (
@@ -137,8 +141,6 @@ const Home = () => {
           <Footer />
           <BottomTab />
         </>
-      )}
-    </>
   );
 };
 

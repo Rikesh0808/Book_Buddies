@@ -69,7 +69,7 @@ const Products = ({ match }) => {
                   color: "rgb(0, 0, 0, 0.7)",
                 }}
               >
-                Featured Products
+                Featured Books
               </h2>
             )}
             <div
